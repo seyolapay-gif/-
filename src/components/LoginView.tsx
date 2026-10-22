@@ -80,17 +80,21 @@ export const LoginView: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col justify-between font-sans selection:bg-emerald-500 selection:text-white" dir="rtl">
+    <div className={`min-h-screen flex flex-col justify-between font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-300 ${
+      isDark ? 'bg-slate-950' : 'bg-[#f1f5f9]'
+    }`} dir="rtl">
       
       {/* Top Navbar with Connection Status & Theme Toggle */}
-      <header className="w-full px-4 sm:px-8 py-3.5 flex items-center justify-between border-b border-slate-800/80 bg-slate-900/80 backdrop-blur-md sticky top-0 z-30">
+      <header className={`w-full px-4 sm:px-8 py-3.5 flex items-center justify-between border-b backdrop-blur-md sticky top-0 z-30 transition-colors duration-300 ${
+        isDark ? 'border-slate-800/80 bg-slate-900/80' : 'border-slate-200 bg-white/90 shadow-xs'
+      }`}>
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20">
             <ShieldCheck className="w-4 h-4" />
           </div>
           <div>
-            <span className="text-xs sm:text-sm font-extrabold text-white block">نظام إدارة الكاش والمحافظ المصرية</span>
-            <span className="text-[10px] text-emerald-400 font-medium block">نسخة سطح المكتب الآمنة v1.0.0</span>
+            <span className={`text-xs sm:text-sm font-extrabold block ${isDark ? 'text-white' : 'text-slate-900'}`}>نظام إدارة الكاش والمحافظ المصرية</span>
+            <span className={`text-[10px] font-medium block ${isDark ? 'text-emerald-400' : 'text-teal-700 font-bold'}`}>نسخة سطح المكتب الآمنة v1.0.0</span>
           </div>
         </div>
         
@@ -121,7 +125,11 @@ export const LoginView: React.FC = () => {
 
       {/* Main Login Card Area */}
       <div className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-8">
-        <div className="w-full max-w-5xl bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 min-h-[640px]">
+        <div className={`w-full max-w-5xl rounded-3xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 min-h-[640px] transition-all duration-300 ${
+          isDark 
+            ? 'bg-slate-900 border border-slate-800 shadow-2xl' 
+            : 'bg-white border border-slate-200 shadow-xl shadow-slate-200/70'
+        }`}>
           
           {/* Right side (Form area in RTL) */}
           <div className="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-between">
@@ -131,17 +139,17 @@ export const LoginView: React.FC = () => {
                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-emerald-500/20 mb-4">
                   <ShieldCheck className="w-8 h-8 text-white" />
                 </div>
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                <h1 className={`text-2xl sm:text-3xl font-extrabold tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
                   إدارة التحويلات المالية
                 </h1>
-                <p className="text-sm font-medium text-slate-400 mt-1">
+                <p className={`text-sm font-medium mt-1 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                   تحويلات بنكية · محافظ إلكترونية · خطوط كاش
                 </p>
               </div>
 
               <div className="mb-6">
-                <h2 className="text-xl font-bold text-slate-100 mb-1">تسجيل الدخول</h2>
-                <p className="text-xs text-slate-400">أدخل بيانات الاعتماد الخاصة بك للوصول إلى لوحة التحكم المالية</p>
+                <h2 className={`text-xl font-bold mb-1 ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>تسجيل الدخول</h2>
+                <p className={`text-xs ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>أدخل بيانات الاعتماد الخاصة بك للوصول إلى لوحة التحكم المالية</p>
               </div>
 
               {/* Form Validation Error (Subtle and compact) */}
@@ -164,7 +172,7 @@ export const LoginView: React.FC = () => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Username Input */}
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                  <label className={`block text-xs font-bold mb-1.5 ${isDark ? 'text-slate-300' : 'text-slate-800'}`}>
                     اسم المستخدم
                   </label>
                   <div className="relative">
@@ -178,14 +186,18 @@ export const LoginView: React.FC = () => {
                       required
                       disabled={isLoading}
                       placeholder="مثال: admin"
-                      className="w-full pr-11 pl-4 py-3 bg-slate-950/80 border border-slate-700/80 rounded-xl text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition text-sm font-mono"
+                      className={`w-full pr-11 pl-4 py-3 rounded-xl transition text-sm font-mono focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 ${
+                        isDark 
+                          ? 'bg-slate-950/80 border border-slate-700/80 text-slate-100 placeholder:text-slate-500' 
+                          : 'bg-slate-50 border border-slate-300 text-slate-900 placeholder:text-slate-400 font-bold shadow-xs'
+                      }`}
                     />
                   </div>
                 </div>
 
                 {/* Password Input */}
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                  <label className={`block text-xs font-bold mb-1.5 ${isDark ? 'text-slate-300' : 'text-slate-800'}`}>
                     كلمة المرور
                   </label>
                   <div className="relative">
@@ -199,7 +211,11 @@ export const LoginView: React.FC = () => {
                       required
                       disabled={isLoading}
                       placeholder="••••••••"
-                      className="w-full pr-11 pl-11 py-3 bg-slate-950/80 border border-slate-700/80 rounded-xl text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition text-sm font-mono"
+                      className={`w-full pr-11 pl-11 py-3 rounded-xl transition text-sm font-mono focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 ${
+                        isDark 
+                          ? 'bg-slate-950/80 border border-slate-700/80 text-slate-100 placeholder:text-slate-500' 
+                          : 'bg-slate-50 border border-slate-300 text-slate-900 placeholder:text-slate-400 font-bold shadow-xs'
+                      }`}
                     />
                     <button
                       type="button"
@@ -291,37 +307,72 @@ export const LoginView: React.FC = () => {
             </div>
           </div>
 
-          {/* Left side (Visual Banner in RTL) - Guaranteed to display perfectly offline and in Windows .exe */}
-          <div className="login-visual-banner hidden lg:block lg:col-span-5 relative bg-slate-950 overflow-hidden border-r border-slate-800 select-none">
+          {/* Left side (Visual Banner in RTL) - Fully Dynamic & Theme-Responsive for Dark/Light Mode */}
+          <div className={`login-visual-banner hidden lg:block lg:col-span-5 relative overflow-hidden transition-all duration-500 select-none ${
+            isDark 
+              ? 'bg-slate-950 border-r border-slate-800' 
+              : 'bg-gradient-to-br from-[#e8f6f6] via-[#f0fbf7] to-[#f8fafc] border-r border-slate-200'
+          }`}>
             
-            {/* Embedded High-Tech Financial Network Vector Background (Always works even without image file) */}
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950/70" />
+            {/* 1. THEME-RESPONSIVE GRADIENT LAYER */}
+            {isDark ? (
+              <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950/80 transition-opacity duration-500" />
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-teal-200/35 via-emerald-100/40 to-cyan-100/30 transition-opacity duration-500" />
+            )}
             
-            <svg 
-              className="absolute inset-0 w-full h-full opacity-25 pointer-events-none" 
-              xmlns="http://www.w3.org/2000/svg"
-              preserveAspectRatio="xMidYMid slice"
-              viewBox="0 0 400 600"
-            >
-              <defs>
-                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#10b981" stopOpacity="0.4" />
-                  <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.1" />
-                </linearGradient>
-                <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
-                  <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#10b981" strokeWidth="0.5" strokeOpacity="0.15" />
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#grid)" />
-              <circle cx="200" cy="150" r="120" fill="url(#grad1)" filter="blur(40px)" />
-              <circle cx="320" cy="450" r="140" fill="url(#grad1)" filter="blur(50px)" />
-              <path d="M50 120 Q 200 80 350 200 T 200 450" fill="none" stroke="#10b981" strokeWidth="2" strokeDasharray="6 4" strokeOpacity="0.4" />
-              <circle cx="50" cy="120" r="5" fill="#10b981" />
-              <circle cx="350" cy="200" r="7" fill="#06b6d4" />
-              <circle cx="200" cy="450" r="6" fill="#10b981" />
-            </svg>
+            {/* 2. THEME-RESPONSIVE VECTOR SVG GRID & GLOW */}
+            {isDark ? (
+              <svg 
+                className="absolute inset-0 w-full h-full opacity-25 pointer-events-none transition-opacity duration-500" 
+                xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="xMidYMid slice"
+                viewBox="0 0 400 600"
+              >
+                <defs>
+                  <linearGradient id="gradDark" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#10b981" stopOpacity="0.4" />
+                    <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.1" />
+                  </linearGradient>
+                  <pattern id="gridDark" width="30" height="30" patternUnits="userSpaceOnUse">
+                    <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#10b981" strokeWidth="0.5" strokeOpacity="0.15" />
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#gridDark)" />
+                <circle cx="200" cy="150" r="120" fill="url(#gradDark)" filter="blur(40px)" />
+                <circle cx="320" cy="450" r="140" fill="url(#gradDark)" filter="blur(50px)" />
+                <path d="M50 120 Q 200 80 350 200 T 200 450" fill="none" stroke="#10b981" strokeWidth="2" strokeDasharray="6 4" strokeOpacity="0.4" />
+                <circle cx="50" cy="120" r="5" fill="#10b981" />
+                <circle cx="350" cy="200" r="7" fill="#06b6d4" />
+                <circle cx="200" cy="450" r="6" fill="#10b981" />
+              </svg>
+            ) : (
+              <svg 
+                className="absolute inset-0 w-full h-full opacity-50 pointer-events-none transition-opacity duration-500" 
+                xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="xMidYMid slice"
+                viewBox="0 0 400 600"
+              >
+                <defs>
+                  <linearGradient id="gradLight" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#0d9488" stopOpacity="0.4" />
+                    <stop offset="100%" stopColor="#0284c7" stopOpacity="0.2" />
+                  </linearGradient>
+                  <pattern id="gridLight" width="28" height="28" patternUnits="userSpaceOnUse">
+                    <path d="M 28 0 L 0 0 0 28" fill="none" stroke="#0d9488" strokeWidth="0.7" strokeOpacity="0.18" />
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#gridLight)" />
+                <circle cx="200" cy="140" r="130" fill="url(#gradLight)" filter="blur(50px)" />
+                <circle cx="300" cy="440" r="140" fill="url(#gradLight)" filter="blur(60px)" />
+                <path d="M50 120 Q 200 80 350 200 T 200 450" fill="none" stroke="#0d9488" strokeWidth="2.5" strokeDasharray="6 4" strokeOpacity="0.35" />
+                <circle cx="50" cy="120" r="5" fill="#0d9488" />
+                <circle cx="350" cy="200" r="7" fill="#0284c7" />
+                <circle cx="200" cy="450" r="6" fill="#0d9488" />
+              </svg>
+            )}
 
-            {/* Bundled Image with safe multi-level fallback */}
+            {/* 3. THEME-RESPONSIVE BANNER IMAGE */}
             <img
               src={loginBanner}
               onError={(e) => {
@@ -334,41 +385,50 @@ export const LoginView: React.FC = () => {
                 }
               }}
               alt="Cash Transfer Network"
-              className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-luminosity"
+              className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${
+                isDark 
+                  ? 'opacity-60 mix-blend-luminosity' 
+                  : 'opacity-25 mix-blend-multiply filter contrast-125 saturate-125'
+              }`}
               referrerPolicy="no-referrer"
             />
             
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent" />
+            {/* 4. THEME-RESPONSIVE FADE GRADIENT OVERLAY */}
+            {isDark ? (
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/85 to-transparent transition-all duration-500" />
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/70 to-transparent transition-all duration-500" />
+            )}
             
-            {/* Visual Content: Crystal clear typography and alignment as requested in image 3 */}
+            {/* 5. VISUAL CONTENT */}
             <div className="relative h-full p-8 flex flex-col justify-between z-10">
               {/* Top Badge */}
               <div className="flex items-center gap-2">
-                <span className={`px-3.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-2 shadow-sm transition-colors ${
+                <span className={`px-3.5 py-1.5 rounded-full text-xs font-extrabold flex items-center gap-2 shadow-sm transition-all duration-300 ${
                   isDark
                     ? 'bg-emerald-500/20 border border-emerald-500/40 text-emerald-300'
-                    : 'bg-white text-emerald-800 border border-emerald-200/90 shadow-sm'
+                    : 'bg-white/95 text-teal-800 border border-teal-200/90 shadow-sm backdrop-blur-sm'
                 }`}>
-                  <Sparkles className={`w-4 h-4 shrink-0 ${isDark ? 'text-emerald-400' : 'text-emerald-600'}`} />
+                  <Sparkles className={`w-4 h-4 shrink-0 ${isDark ? 'text-emerald-400' : 'text-teal-600'}`} />
                   <span>منظومة مالية مصرفية مشفرة</span>
                 </span>
               </div>
 
               {/* Provider icons cluster & Slogan */}
               <div className="space-y-6">
-                <div className={`login-banner-card p-5 rounded-2xl transition-all space-y-3.5 ${
+                <div className={`login-banner-card p-5 rounded-2xl transition-all duration-300 space-y-3.5 ${
                   isDark 
                     ? 'bg-slate-900/95 backdrop-blur-md border border-slate-700 shadow-2xl' 
-                    : 'bg-white border border-slate-200/90 shadow-xl'
+                    : 'bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-xl shadow-teal-950/5'
                 }`}>
                   <div className="text-xs font-bold tracking-wide flex items-center justify-between">
-                    <span className={`card-title ${isDark ? 'text-white' : 'text-slate-900 font-black'}`}>
+                    <span className={`card-title ${isDark ? 'text-white font-extrabold' : 'text-slate-900 font-black'}`}>
                       الشبكات والمحافظ المدعومة:
                     </span>
                     <span className={`text-[10px] ${
                       isDark 
-                        ? 'text-emerald-400 font-mono' 
-                        : 'text-emerald-700 bg-emerald-50/90 px-2.5 py-0.5 rounded-full border border-emerald-200 font-bold'
+                        ? 'text-emerald-400 font-mono font-bold' 
+                        : 'text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 font-bold'
                     }`}>
                       ربط فوري 24/7
                     </span>
@@ -409,14 +469,14 @@ export const LoginView: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Bottom Slogan - Perfect High-Contrast Legibility */}
+                {/* Bottom Slogan - Perfect High-Contrast Legibility in Both Modes */}
                 <div className="login-banner-slogan pt-2">
-                  <h3 className={`text-xl sm:text-2xl font-black mb-2 leading-relaxed ${
+                  <h3 className={`text-xl sm:text-2xl font-black mb-2 leading-relaxed transition-colors duration-300 ${
                     isDark ? 'text-white drop-shadow-md' : 'text-slate-900'
                   }`}>
                     أمان .. سرعة .. ثقة
                   </h3>
-                  <p className={`text-xs sm:text-sm leading-relaxed font-medium ${
+                  <p className={`text-xs sm:text-sm leading-relaxed font-semibold transition-colors duration-300 ${
                     isDark ? 'text-slate-200 drop-shadow-sm' : 'text-slate-700'
                   }`}>
                     إدارة ذكية متكاملة لتحويلاتك البنكية، تتبع فوري للسيولة النقدية، وحماية صارمة للحدود اليومية والشهرية.
@@ -430,7 +490,9 @@ export const LoginView: React.FC = () => {
       </div>
 
       {/* Footer copyright */}
-      <div className="py-3 text-center text-slate-500 text-xs border-t border-slate-900">
+      <div className={`py-3 text-center text-xs border-t transition-colors duration-300 ${
+        isDark ? 'border-slate-900 text-slate-500' : 'border-slate-200 text-slate-600 bg-white'
+      }`}>
         نظام إدارة التحويلات المالية الذكي © 2026 · جميع الحقوق محفوظة
       </div>
 
