@@ -296,8 +296,8 @@ html.light .fixed.inset-0.bg-slate-950\/70 {
 
 /* Login Visual Banner in Light Mode */
 html.light .login-visual-banner {
-  background: linear-gradient(135deg, #eef7f9 0%, #f0fdf4 50%, #f8fafc 100%) !important;
-  border-color: #cbd5e1 !important;
+  background-color: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
 }
 
 html.light .login-visual-banner h1,
@@ -307,7 +307,7 @@ html.light .login-visual-banner h3 {
 }
 
 html.light .login-visual-banner p {
-  color: #334155 !important;
+  color: #475569 !important;
 }
 
 /* =========================================================================
